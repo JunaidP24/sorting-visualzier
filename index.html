@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithm Visualizer</title>
+    <link rel = "stylesheet" href = "style.css">
+</head>
+<body>
+    <h1>Sorting Visualizer</h1>
+    <h2>By Junaid and Michael</h2>
+    <div class="controls">
+        <input type="number" id="numElementsInput" value="100" min="10" max="500">
+        <button id="generateArrayBtn">Generate Array</button>
+        <select id="algorithmSelect">
+            <option value="quickSort">Quick Sort</option>
+            <option value="bubbleSort">Bubble Sort</option>
+            <!-- Add more algorithms here -->
+        </select>
+        <button id="startSortingBtn">Start Sorting</button>
+    </div>
+    <div id = "canvasContainer">
+        <canvas id="sortingCanvas"></canvas>    
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

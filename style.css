@@ -1,0 +1,33 @@
+canvas {
+    display: block;
+    margin: 0 auto;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+h1,h2{
+    text-align: center;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+#canvasContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70%; /* Adjust this value as needed */
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+}
