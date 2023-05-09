@@ -26,6 +26,8 @@ function adjustCanvasSize() {
     canvas.height = container.clientHeight * 0.95;
 }
 
+// Draw the canvas with bars
+
 function drawArray() {
     adjustCanvasSize();
     const barWidth = canvas.width / numElements;
@@ -38,6 +40,7 @@ function drawArray() {
     }
 }
 
+// Bubble sort function
 
 async function bubbleSort() {
     for (let i = 0; i < numElements - 1; i++) {
@@ -84,6 +87,85 @@ async function partition(arr, low, high) {
     return i + 1;
 }
 
+async function mergeSort(arr, left = 0, right = arr.length - 1) {
+    if (left < right) {
+        const middle = Math.floor((left + right) / 2);
+        await mergeSort(arr, left, middle);
+        await mergeSort(arr, middle + 1, right);
+        await merge(arr, left, middle, right);
+    }
+}
+
+async function merge(arr, left, middle, right) {
+    let n1 = middle - left + 1;
+    let n2 = right - middle;
+
+    let leftArray = new Array(n1);
+    let rightArray = new Array(n2);
+
+    for (let i = 0; i < n1; i++) {
+        leftArray[i] = arr[left + i];
+    }
+    for (let i = 0; i < n2; i++) {
+        rightArray[i] = arr[middle + 1 + i];
+    }
+
+    let i = 0;
+    let j = 0;
+    let k = left;
+
+    while (i < n1 && j < n2) {
+        if (leftArray[i] <= rightArray[j]) {
+            arr[k] = leftArray[i];
+            i++;
+        } else {
+            arr[k] = rightArray[j];
+            j++;
+        }
+        k++;
+
+        await new Promise((resolve) => setTimeout(resolve, 200)); // Adjust the delay time as needed
+        drawArray();
+    }
+
+    while (i < n1) {
+        arr[k] = leftArray[i];
+        i++;
+        k++;
+
+        await new Promise((resolve) => setTimeout(resolve, 200)); // Adjust the delay time as needed
+        drawArray();
+    }
+
+    while (j < n2) {
+        arr[k] = rightArray[j];
+        j++;
+        k++;
+
+        await new Promise((resolve) => setTimeout(resolve, 200)); // Adjust the delay time as needed
+        drawArray();
+    }
+}
+
+async function insertionSort() {
+    for (let i = 1; i < numElements; i++) {
+        let key = dataArray[i];
+        let j = i - 1;
+
+        while (j >= 0 && dataArray[j] > key) {
+            dataArray[j + 1] = dataArray[j];
+            j--;
+
+            await new Promise((resolve) => setTimeout(resolve, 200)); // Adjust the delay time as needed
+            drawArray();
+        }
+        dataArray[j + 1] = key;
+        await new Promise((resolve) => setTimeout(resolve, 200)); // Adjust the delay time as needed
+        drawArray();
+    }
+}
+
+
 
 generateArrayBtn.addEventListener('click', () => {
     numElements = parseInt(numElementsInput.value);
@@ -97,10 +179,12 @@ startSortingBtn.addEventListener('click', () => {
         bubbleSort();
     } else if (selectedAlgorithm === 'quickSort') {
         quickSort(dataArray, 0, dataArray.length - 1);
+    } else if (selectedAlgorithm === 'mergeSort') {
+        mergeSort(dataArray);
+    } else if (selectedAlgorithm === 'insertionSort') {
+        insertionSort();
     }
-    // Add more algorithms here
 });
-
 
 generateRandomArray();
 drawArray();
